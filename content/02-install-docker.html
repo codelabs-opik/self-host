@@ -1,0 +1,45 @@
+<!-- Step 2 · Install Docker -->
+<span class="eyebrow"><span class="dot"></span>Step 1 · Prerequisite</span>
+<h2 class="title">Install Docker Desktop</h2>
+<p class="lead">Opik runs as a set of containers, so you need Docker. On Mac and Windows,
+  <strong>Docker Desktop</strong> bundles everything (the engine + Docker Compose) in one installer.</p>
+
+<h3>1 · Download &amp; install</h3>
+<p>Grab the installer for your OS from the official page, then run it and follow the prompts:</p>
+<p>→ <a href="https://www.docker.com/products/docker-desktop/" target="_blank" rel="noopener">
+  docker.com/products/docker-desktop</a></p>
+<div class="note"><span class="ic">🐧</span><div><strong>On Linux?</strong> Install
+  <em>Docker Engine</em> + the <em>Compose plugin</em> from
+  <a href="https://docs.docker.com/engine/install/" target="_blank" rel="noopener">docs.docker.com/engine/install</a>
+  instead. Docker Desktop is optional.</div></div>
+
+<h3>2 · Launch it</h3>
+<p>Open Docker Desktop and wait until the whale icon in your menu bar / system tray stops
+  animating and says <strong>“Docker Desktop is running.”</strong></p>
+<div class="shot">
+  <img src="assets/02_1.png" alt="Docker Desktop running, whale icon green in the menu bar">
+</div>
+
+<h3>3 · Confirm it works</h3>
+<p>Open a terminal and run these three commands:</p>
+<div class="code" data-copy>
+  <div class="top"><span>terminal</span><button class="cp">Copy</button></div>
+<pre>docker --version
+docker compose version
+docker run hello-world</pre>
+</div>
+<div class="shot">
+  <img src="assets/02_2.png" alt="Terminal showing Docker version output and the “Hello from Docker!” message">
+</div>
+
+<div class="verify">
+  <div class="vh">✔ Verify before moving on</div>
+  <ul>
+    <li><code>docker --version</code> prints a version (e.g. <code>Docker version 27.x</code>)</li>
+    <li><code>docker compose version</code> prints a version</li>
+    <li><code>docker run hello-world</code> ends with <em>“Hello from Docker!”</em></li>
+  </ul>
+</div>
+<div class="note warn"><span class="ic">⚠️</span><div>If a command says
+  <em>“command not found”</em> or <em>“Cannot connect to the Docker daemon,”</em> Docker
+  Desktop isn't running yet. Launch it, wait for the whale to settle, then retry.</div></div>

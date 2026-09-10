@@ -1,0 +1,67 @@
+<!-- Step 4 · Start Opik -->
+<span class="eyebrow"><span class="dot"></span>Step 3 · Launch</span>
+<h2 class="title">Start Opik locally</h2>
+<p class="lead">One command pulls the images and starts every service. The first run takes a
+  few minutes while Docker downloads them. Later starts are quick.</p>
+
+<h3>Start the platform</h3>
+<div class="tabs" data-tabs="os">
+  <button aria-selected="true" data-tab="mac">macOS / Linux</button>
+  <button data-tab="win">Windows</button>
+</div>
+<div class="tabpane active" data-pane="mac">
+  <div class="code" data-copy>
+    <div class="top"><span>terminal</span><button class="cp">Copy</button></div>
+<pre>./opik.sh</pre>
+  </div>
+</div>
+<div class="tabpane" data-pane="win">
+  <div class="code" data-copy>
+    <div class="top"><span>powershell</span><button class="cp">Copy</button></div>
+<pre>powershell -ExecutionPolicy ByPass -c ".\opik.ps1"</pre>
+  </div>
+</div>
+
+<div class="note tip"><span class="ic">💡</span><div>Keep this terminal open. It's running
+  Opik. When the script finishes it prints the URL and confirms the services are healthy.</div></div>
+<div class="shot">
+  <img src="assets/03_1.png" alt="Terminal running ./opik.sh, pulling images and starting the Opik services">
+</div>
+
+<h3>Open the dashboard</h3>
+<p>Once it's up, visit:</p>
+<div class="code"><div class="top"><span>browser</span></div><pre>http://localhost:5173</pre></div>
+<div class="shot">
+  <img src="assets/03_2.png" alt="Opik running at localhost:5173, the dashboard on first launch">
+</div>
+
+<h3>Health check (optional)</h3>
+<p>In a <em>second</em> terminal (inside the <code>opik</code> folder) you can confirm all
+  services are healthy:</p>
+<div class="code" data-copy>
+  <div class="top"><span>terminal</span><button class="cp">Copy</button></div>
+<pre>./opik.sh --verify</pre>
+</div>
+<p>You should see every container reported as healthy:</p>
+<div class="code">
+  <div class="top"><span>terminal · expected output</span></div>
+<pre>🔍 Verifying container health...
+✅ opik-opik-clickhouse-1 is running and healthy
+✅ opik-opik-mysql-1 is running and healthy
+✅ opik-opik-redis-1 is running and healthy
+✅ opik-opik-minio-1 is running and healthy
+✅ opik-opik-zookeeper-1 is running and healthy
+✅ opik-opik-python-backend-1 is running and healthy
+✅ opik-opik-backend-1 is running and healthy
+✅ opik-opik-frontend-1 is running and healthy</pre>
+</div>
+
+<div class="verify">
+  <div class="vh">✔ Verify before moving on</div>
+  <ul>
+    <li><code>http://localhost:5173</code> loads the Opik UI in your browser</li>
+    <li><code>./opik.sh --verify</code> reports the services are healthy</li>
+  </ul>
+</div>
+<div class="note"><span class="ic">💾</span><div>Your data lives in the <code>~/opik</code>
+  folder, so you can stop and start Opik anytime without losing anything.</div></div>

@@ -1,0 +1,69 @@
+<!-- Step 6 · Trace an LLM -->
+<span class="eyebrow"><span class="dot"></span>Step 5 · Inference</span>
+<h2 class="title">Run your first traced inference</h2>
+<p class="lead">Now the payoff: call an LLM and watch the trace show up in Opik. This script uses
+  LiteLLM, so you pick the provider with an environment variable and make <strong>no code changes</strong>.</p>
+
+<h3>1 · The script</h3>
+<p>It's included in this project at <code>scripts/opik_inference.py</code>:</p>
+<div class="code" data-copy>
+  <div class="top"><span>scripts/opik_inference.py</span><button class="cp">Copy</button></div>
+<pre><span class="tok-c">import</span> os, sys
+<span class="tok-c">import</span> litellm
+<span class="tok-c">from</span> opik <span class="tok-c">import</span> track
+
+litellm.callbacks = [<span class="tok-f">"opik"</span>]                     <span class="tok-c"># send calls to local Opik</span>
+os.environ.setdefault(<span class="tok-f">"OPIK_PROJECT_NAME"</span>, <span class="tok-f">"quickstart"</span>)
+
+<span class="tok-f">@track</span>                                       <span class="tok-c"># group nested calls as one trace</span>
+<span class="tok-c">def</span> ask_llm(prompt):
+    model = os.environ.get(<span class="tok-f">"LLM_MODEL"</span>, <span class="tok-f">"gpt-5.6-luna"</span>)
+    r = litellm.completion(model=model, messages=[
+        {<span class="tok-f">"role"</span>: <span class="tok-f">"user"</span>, <span class="tok-f">"content"</span>: prompt}])
+    <span class="tok-c">return</span> r.choices[0].message.content
+
+<span class="tok-c">if</span> __name__ == <span class="tok-f">"__main__"</span>:
+    print(ask_llm(<span class="tok-f">" "</span>.join(sys.argv[1:]) <span class="tok-c">or</span> <span class="tok-f">"Hello!"</span>))</pre>
+</div>
+
+<h3>2 · Pick a model &amp; run</h3>
+<p>Choose your provider, set the variables, then run the script:</p>
+<div class="tabs" data-tabs="prov">
+  <button aria-selected="true" data-tab="oai">OpenAI</button>
+  <button data-tab="goo">Google</button>
+  <button data-tab="oll">Ollama (local, free)</button>
+</div>
+<div class="tabpane active" data-pane="oai">
+  <div class="code" data-copy><div class="top"><span>terminal</span><button class="cp">Copy</button></div>
+<pre>export LLM_MODEL="gpt-5.6-luna"
+export OPENAI_API_KEY="sk-..."
+python scripts/opik_inference.py "Explain an LLM trace in one sentence."</pre></div>
+</div>
+<div class="tabpane" data-pane="goo">
+  <div class="code" data-copy><div class="top"><span>terminal</span><button class="cp">Copy</button></div>
+<pre>export LLM_MODEL="gemini/gemini-3.6-flash"
+export GEMINI_API_KEY="..."
+python scripts/opik_inference.py "Explain an LLM trace in one sentence."</pre></div>
+</div>
+<div class="tabpane" data-pane="oll">
+  <div class="code" data-copy><div class="top"><span>terminal</span><button class="cp">Copy</button></div>
+<pre><span class="tok-c"># first: install ollama, then `ollama run llama3` once</span>
+export LLM_MODEL="ollama/llama3"
+python scripts/opik_inference.py "Explain an LLM trace in one sentence."</pre></div>
+</div>
+
+<h3>3 · See the trace</h3>
+<p>Open <a href="http://localhost:5173" target="_blank" rel="noopener">localhost:5173</a>,
+  select the <strong>quickstart</strong> project, and open the newest trace. You'll
+  see the prompt, the model's response, token counts, and latency.</p>
+<div class="shot">
+  <img src="assets/05.png" alt="A trace in Opik showing prompt, response, tokens, and latency">
+</div>
+
+<div class="verify">
+  <div class="vh">✔ Verify before moving on</div>
+  <ul>
+    <li>The script printed an answer in your terminal</li>
+    <li>A new trace appears under the <code>quickstart</code> project in the UI</li>
+  </ul>
+</div>

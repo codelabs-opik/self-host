@@ -1,0 +1,41 @@
+<!-- Step 5 · Connect the SDK -->
+<span class="eyebrow"><span class="dot"></span>Step 4 · Configure</span>
+<h2 class="title">Connect the Python SDK</h2>
+<p class="lead">To send traces from your code, install the Opik SDK and point it at your local
+  instance. We'll also install <strong>LiteLLM</strong> so the next step can call any LLM provider.</p>
+
+<h3>1 · Install</h3>
+<div class="code" data-copy>
+  <div class="top"><span>terminal</span><button class="cp">Copy</button></div>
+<pre>pip install opik litellm</pre>
+</div>
+<div class="note"><span class="ic">🐍</span><div>Using a virtual environment is recommended:
+  <code>python -m venv .venv</code> then <code>source .venv/bin/activate</code>
+  (Windows: <code>.venv\Scripts\activate</code>).</div></div>
+
+<h3>2 · Point Opik at your local server</h3>
+<div class="code" data-copy>
+  <div class="top"><span>terminal</span><button class="cp">Copy</button></div>
+<pre>opik configure --use_local</pre>
+</div>
+<p>This writes a <code>~/.opik.config</code> file that tells the SDK to talk to
+  <code>http://localhost:5173/api</code>, your self-hosted instance, <strong>no account or API key needed</strong>.</p>
+<div class="shot">
+  <img src="assets/04.png" alt="Terminal output of opik configure --use_local succeeding">
+</div>
+
+<p>It then asks which project to log traces to. Accept the suggested default by typing
+  <code>Y</code>, or type <code>n</code> to name your own (for example <code>quickstart</code>):</p>
+<div class="code">
+  <div class="top"><span>terminal</span></div>
+<pre>Do you want to use "Opik Demo Agent Observability" project name? (Y/n)n
+Please enter the project name: quickstart</pre>
+</div>
+
+<div class="verify">
+  <div class="vh">✔ Verify before moving on</div>
+  <ul>
+    <li><code>pip show opik</code> lists the installed version</li>
+    <li>A <code>~/.opik.config</code> file exists pointing at <code>localhost:5173</code></li>
+  </ul>
+</div>

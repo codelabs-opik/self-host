@@ -1,0 +1,9 @@
+[
+  { "file": "01-overview.html",       "title": "Overview" },
+  { "file": "02-install-docker.html", "title": "Install Docker" },
+  { "file": "03-get-opik.html",       "title": "Get Opik" },
+  { "file": "04-start-opik.html",     "title": "Start Opik" },
+  { "file": "05-connect-sdk.html",    "title": "Connect the SDK" },
+  { "file": "06-trace-llm.html",      "title": "Trace an LLM" },
+  { "file": "07-wrap-up.html",        "title": "Manage & wrap up" }
+]
